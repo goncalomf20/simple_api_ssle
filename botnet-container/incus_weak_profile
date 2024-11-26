@@ -1,0 +1,17 @@
+config:
+limits.cpu: “1”
+limits.memory: 200MB
+description: “”
+devices:
+eth0:
+limits.egress: 1Mbit
+limits.ingress: 1Mbit
+name: eth0
+network: incusbr0
+type: nic
+root:
+path: /
+pool: default
+type: disk
+name:weak
+project:default

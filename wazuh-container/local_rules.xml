@@ -1,0 +1,35 @@
+<!-- Local rules -->
+
+<!-- Modify it at your will. -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+
+<!-- Example -->
+
+<!-- group name="local,syslog,sshd,">
+
+  <!--
+  Dec 10 01:02:02 host sshd[1234]: Failed none for root from 1.1.1.1 port 1066 ssh2
+ 
+  <rule id="100001" level="5">
+    <if_sid>5716</if_sid>
+    <srcip>1.1.1.1</srcip>
+    <description>sshd: authentication failed from IP 1.1.1.1.</description>
+    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
+  </rule>
+
+</group -->
+<group name="attack,">
+        <rule id="100100" level="10">
+                <if_group>web|attack|attacks</if_group>
+                <list field="srcip" lookup="address_match_key">etc/lists/blacklist-alienvault</list>
+                <description>ShellShock Attack Detected</description>
+        </rule>
+</group>
+
+<group name="attack,">
+  <!-- Custom Rule to detect "High average request processing time" warnings and tag as potential DDoS -->
+  <rule id="100001" level="10">
+    <description>High processing time detected - Possible DDoS</description>
+    <match>High average request processing time</match>
+  </rule>
+</group>
